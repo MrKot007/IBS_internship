@@ -1,0 +1,42 @@
+html {
+    --primary-color: #265073;
+    --secondary-color: #2D9596;
+}
+body {
+    margin: 0; 
+}
+h2 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', regular;
+}
+.form-wrap {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   height: 100vh;
+}
+form {
+    user-select: none;
+}
+form > div {
+    margin-top: 1rem;
+    /* background: var(--primary-color); */
+}
+form > div > label {
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', regular;
+    /* display: block; */
+    cursor: pointer;
+    margin-bottom: 0.5rem; 
+}
+.submit-button {
+    display: flex;
+    justify-content: center;
+}
+
