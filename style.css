@@ -18,7 +18,7 @@ h2 {
    justify-content: center;
    align-items: center;
    flex-direction: column;
-   height: 100vh;
+   height: 50vh;
 }
 form {
     user-select: none;
@@ -39,4 +39,34 @@ form > div > label {
     display: flex;
     justify-content: center;
 }
+.transfer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', regular;
+    user-select: none;
+    text-decoration: none;
+    text-decoration-color: var(--secondary-color);
+}
+.profile-card {
+    height: 12vh;
+    width: 65vh;
+    background: #EDF0F5;
+    border-bottom-left-radius: 3vh;
+    border-bottom-right-radius: 3vh;
+}
+.name-and-photo {
+    display: flex;
+}
+.profile-photo {
+    height: 8vh;
+    width: 8vh;
+    margin-top: 2vh;
+    margin-left: 2vh;
+}
+.full-name {
+    font-family: 'Inter', bold;
+}
+
+
 

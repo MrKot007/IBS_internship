@@ -2,8 +2,8 @@ async function getAll(url = "") {
     try {
         const response = await fetch(url)
         if (response.ok) {
-            const grades = await response.json()
-            return grades
+            const data = await response.json()
+            return data
         }else{
             alert('Something went wrong')
         }
@@ -13,6 +13,23 @@ async function getAll(url = "") {
     }   
 }
 
+async function getSomethingById(url = "", id = {id: 0}) {
+    let response = {};
+
+    try {
+        response = await fetch(url);
+
+        if (response.ok) {
+            const data = await response.json();
+        }
+    } catch (error) {
+        console.error({ error });
+    }
+
+    return parseSomethig(response);
+}
+
+
 async function getDataById(url = "", id = {id: 0}) {
     try {
         const response = await fetch(url, {
@@ -20,7 +37,7 @@ async function getDataById(url = "", id = {id: 0}) {
             body: JSON.stringify(id)
         })
         if (response.ok) {
-            return response.json()
+            return 
         }else{
             alert('Something went wrong')
         }
@@ -48,54 +65,58 @@ async function addData(url = "", data = {}) {
     }
 }
 
-class Grade {
-    constructor(persons) {
-        this.persons = persons
+
+function parseGrade(persons = []) {
+    return {
+        persons
     }
 }
 
-class GradeReceived {
-    constructor(id, name, persons) {
-        this.id = id
-        this.name = name
-        this.persons = persons
+function createReceivedGrade(response) {
+    const {id = 0, name = "", persons = []} = response
+    return {
+        id,
+        name,
+        persons
     }
 }
 
-class Person {
-    constructor(gradeId, grade) {
-        this.gradeId = gradeId
-        this.grade = grade
+function createPerson(gradeId = 0, grade = {}) {
+    return {
+        gradeId,
+        grade
     }
 }
 
-class PersonReceived {
-    constructor(id, name, gradeId, grade) {
-        this.id = id
-        this.name = name
-        this.gradeId = gradeId
-        this.grade = grade
+function createReceivedPerson(response) {
+    const {id = 0, name = "", gradeId = 0, grade = {}} = response;
+    return {
+        id,
+        name,
+        gradeId,
+        grade
     }
 }
 
-class User {
-    constructor(second, first, patronymic, gradeId, specsId) {
-        this.second = second
-        this.first = first
-        this.patronymic = patronymic
-        this.gradeId = gradeId
-        this.specsId = specsId
+function createUser(second = "", first = "", patronymic = "", gradeId = 0, specsId = 0) {
+    return {
+        second,
+        first,
+        patronymic,
+        gradeId,
+        specsId
     }
 }
 
-class UserReceived {
-    constructor(id, second, first, patronymic, gradeId, specsId) {
-        this.id = id
-        this.second = second
-        this.first = first
-        this.patronymic = patronymic
-        this.gradeId = gradeId
-        this.specsId = specsId
-    }
+function createReceivedUser(response) {
+    const {
+        id = 0,
+        second = "",
+        first = "",
+        patronymic = "",
+        gradeId = 0,
+        specsId = 0
+    } = response
+    return {id, second, first, patronymic, gradeId, specsId}
 }
 
