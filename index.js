@@ -1,19 +1,49 @@
-async function getAll(url = "") {
+async function getAllGrades(url = "") {
     try {
         const response = await fetch(url)
         if (response.ok) {
             const data = await response.json()
             return data
         }else{
-            alert('Something went wrong')
+            console.log("fetch grades failed")
         }
         
     }catch(error) {
-        alert(`${error.message}`)
+        console.error({error})
     }   
 }
 
-async function getSomethingById(url = "", id = {id: 0}) {
+async function getAllPersons(url = "") {
+    try {
+        const response = await fetch(url)
+        if (response.ok) {
+            const data = await response.json()
+            return data
+        }else{
+            console.log("fetch persons failed")
+        }
+        
+    }catch(error) {
+        console.error({error})
+    }   
+}
+
+async function getAllUsers(url = "") {
+    try {
+        const response = await fetch(url)
+        if (response.ok) {
+            const data = await response.json()
+            return data
+        }else{
+            console.log("fetch users failed")
+        }
+        
+    }catch(error) {
+        console.error({error})
+    }   
+}
+
+async function getGradeById(url = "", id = {id: 0}) {
     let response = {};
 
     try {
@@ -26,45 +56,91 @@ async function getSomethingById(url = "", id = {id: 0}) {
         console.error({ error });
     }
 
-    return parseSomethig(response);
+    return parseReceivedGrade(response);
 }
 
+async function getPersonById(url = "", id = {id: 0}) {
+    let response = {};
 
-async function getDataById(url = "", id = {id: 0}) {
     try {
-        const response = await fetch(url, {
-            method: "GET",
-            body: JSON.stringify(id)
-        })
-        if (response.ok) {
-            return 
-        }else{
-            alert('Something went wrong')
-        }
-        
+        response = await fetch(url);
 
-    }catch(error) {
-        alert(`${error.message}`)
+        if (response.ok) {
+            const data = await response.json();
+        }
+    } catch (error) {
+        console.error({ error });
     }
+
+    return parseReceivedPerson(response);
 }
 
-async function addData(url = "", data = {}) {
+async function getUserById(url = "", id = {id: 0}) {
+    let response = {};
+
+    try {
+        response = await fetch(url);
+
+        if (response.ok) {
+            const data = await response.json();
+        }
+    } catch (error) {
+        console.error({ error });
+    }
+
+    return parseReceivedUser(response);
+}
+
+async function addGrade(url = "", grade = {}) {
     try {
         const response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(grade)
         })
         const result = response.json()
         return result
 
     }catch(error) {
-        alert(`${error.message}`)
+        console.error({error})
     }
 }
 
+async function addPerson(url = "", person = {}) {
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(person)
+        })
+        const result = response.json()
+        return result
+
+    }catch(error) {
+        console.error({error})
+    }
+}
+
+async function addUser(url = "", user = {}) {
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+        const result = response.json()
+        return result
+
+    }catch(error) {
+        console.error({error})
+    }
+}
 
 function parseGrade(persons = []) {
     return {
@@ -72,7 +148,7 @@ function parseGrade(persons = []) {
     }
 }
 
-function createReceivedGrade(response) {
+function parseReceivedGrade(response) {
     const {id = 0, name = "", persons = []} = response
     return {
         id,
@@ -81,14 +157,14 @@ function createReceivedGrade(response) {
     }
 }
 
-function createPerson(gradeId = 0, grade = {}) {
+function parsePerson(gradeId = 0, grade = {}) {
     return {
         gradeId,
         grade
     }
 }
 
-function createReceivedPerson(response) {
+function parseReceivedPerson(response) {
     const {id = 0, name = "", gradeId = 0, grade = {}} = response;
     return {
         id,
@@ -98,7 +174,7 @@ function createReceivedPerson(response) {
     }
 }
 
-function createUser(second = "", first = "", patronymic = "", gradeId = 0, specsId = 0) {
+function parseUser(second = "", first = "", patronymic = "", gradeId = 0, specsId = 0) {
     return {
         second,
         first,
@@ -108,7 +184,7 @@ function createUser(second = "", first = "", patronymic = "", gradeId = 0, specs
     }
 }
 
-function createReceivedUser(response) {
+function parseReceivedUser(response) {
     const {
         id = 0,
         second = "",
