@@ -208,7 +208,35 @@ progress {
 #progress-head {
     margin-top: 1vh;
 }
-
+.development-map {
+    display: flex;
+    position: absolute;
+    flex-direction: row;
+    align-content: space-around;
+}
+.column {
+    position: relative;
+    height: 100%;
+    width: fit-content;
+    flex: 0 1 30%;
+    gap: 2rem;
+    border: 1px solid red;
+}
+.vector {
+    flex: 0 0 min-content;
+}
+.block {
+    width: 100%;
+    background: white;
+    border-radius: 1rem;
+    border: 1px solid blue;
+}
+.block p {
+    font-family: "Inter", medium;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+}
 
 
 
