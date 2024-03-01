@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main</title>
+    <script src="api/api.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -12,12 +13,75 @@
     </style>
 </head>
 <body>
-    <div class="profile-card">
-        <div class="name-and-photo">
-            <img class="profile-photo" src="res/profile-circle.svg"/>
-            <h4 class="full-name">John Martin Doe</h4>
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="profile-card">
+                <div class="name-and-photo">
+                    <img class="profile-photo" src="res/profile-circle.svg"/>
+                    <h4 class="full-name">Иванов Иван Иванович</h4>
+                    <label for="collapse" class="collapse">
+                        <img src="res/arrow_down.svg" id="arrow">
+                    </label>
+                </div>
+                <div class="specs-container">
+                    <p class="position" id="position">
+                        Junior Java developer
+                    </p>
+                    <p class="grade" id="grade">
+                        3 грейд
+                    </p>
+                </div>
+                <div class="hidden" id="hidden">
+                    <p class="pr-head" id="progress-head">Прогресс</p>
+                    <h4 id="percentage">75%</h4>
+                    <div class="progress-container">
+                        <progress value="75" max="100">75%</progress>
+                    </div>
+                    <p class="pr-head">Следующий этап</p>
+                    <p class="pr" id="next-stage">Работа в IBS</p>
+                    <p class="pr-head">Текущий этап</p>
+                    <p class="pr" id="current-stage">Стажировка</p>
+                    <p class="pr-head">Цель</p>
+                    <p class="pr" id="goal">Работа в IBS</p>
+                </div>
+            </div>
         </div>
-        
+        <div class="main-space">
+            <h1>
+                Карта развития
+            </h1>
+            <p>
+                Карта развития это отличный и быстрый в использовании инструмент. Она помогает быстрее достичь своей цели и определиться со своей будущей профессией.
+            </p>
+        </div>
     </div>
+    <script>
+        const arrow = document.getElementById("arrow");
+        const hidden = document.getElementById("hidden");
+        const position = document.getElementById("position");
+        const grade = document.getElementById("grade");
+        let collapsed = true
+        arrow.addEventListener("click", (event) => {
+            if (collapsed) {
+                arrow.src = "res/arrow_up.svg";
+                hidden.style.maxHeight = "400px";
+                position.style.display = "none";
+                grade.style.display = "none";
+                collapsed = false;
+            }else {
+                arrow.src = "res/arrow_down.svg";
+                hidden.style.maxHeight = "0px";
+                position.style.display = "inline";
+                grade.style.display = "inline";
+                collapsed = true;
+            }
+            
+        })
+        const searchParams = new URLSearchParams(window.location.search);
+        const id = searchParams.get("id");
+        getUserById("https://jsonplaceholder.typicode.com/todos/", id).then((user) => {
+            console.log(user)
+        });
+    </script>
 </body>
 </html>

@@ -1,39 +1,41 @@
 async function getAllGrades(url = "") {
+    let grades = []
     try {
         const response = await fetch(url)
         if (response.ok) {
-            const data = await response.json()
-            return data
+            grades = await response.json()
         }else{
             console.log("fetch grades failed")
         }
         
     }catch(error) {
         console.error({error})
-    }   
+    }  
+    return grades 
 }
 
 async function getAllPersons(url = "") {
+    let persons = []
     try {
         const response = await fetch(url)
         if (response.ok) {
-            const data = await response.json()
-            return data
+            persons = await response.json()
         }else{
             console.log("fetch persons failed")
         }
         
     }catch(error) {
         console.error({error})
-    }   
+    }  
+    return persons 
 }
 
 async function getAllUsers(url = "") {
+    let users = []
     try {
         const response = await fetch(url)
         if (response.ok) {
-            const data = await response.json()
-            return data
+            users = await response.json()
         }else{
             console.log("fetch users failed")
         }
@@ -41,54 +43,56 @@ async function getAllUsers(url = "") {
     }catch(error) {
         console.error({error})
     }   
+    return users
 }
 
 async function getGradeById(url = "", id = {id: 0}) {
-    let response = {};
+    let grade = {};
 
     try {
-        response = await fetch(url);
+        const response = await fetch(`${url}/${id}`);
 
         if (response.ok) {
-            const data = await response.json();
+            grade = await response.json();
         }
     } catch (error) {
         console.error({ error });
     }
 
-    return parseReceivedGrade(response);
+    return parseReceivedGrade(grade);
 }
 
-async function getPersonById(url = "", id = {id: 0}) {
-    let response = {};
+async function getPersonById(url = "", id = "") {
+    let person = {};
 
     try {
-        response = await fetch(url);
+        const response = await fetch(`${url}/${id}`);
 
         if (response.ok) {
-            const data = await response.json();
+            person = await response.json();
         }
     } catch (error) {
         console.error({ error });
     }
 
-    return parseReceivedPerson(response);
+    return parseReceivedPerson(person);
 }
 
-async function getUserById(url = "", id = {id: 0}) {
-    let response = {};
+async function getUserById(url = "", id = '') {
+    let user = {};
 
     try {
-        response = await fetch(url);
+        const response = await fetch(`${url}/${id}`);
 
         if (response.ok) {
-            const data = await response.json();
+            user = await response.json();
+            console.log(user)
         }
     } catch (error) {
         console.error({ error });
     }
-
-    return parseReceivedUser(response);
+    console.log(user)
+    return parseReceivedUser(user);
 }
 
 async function addGrade(url = "", grade = {}) {
@@ -193,6 +197,15 @@ function parseReceivedUser(response) {
         gradeId = 0,
         specsId = 0
     } = response
-    return {id, second, first, patronymic, gradeId, specsId}
+    return {
+        id,
+        second : "surname",
+        first,
+        patronymic,
+        gradeId,
+        specsId
+    }
 }
+
+
 
